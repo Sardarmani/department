@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script>
+
+      document.addEventListener("DOMContentLoaded",()=>{
+        
+        
+        let courses={215:["DSA",4],
+                    121:["OOP",4],
+                    105:["PSP",3],
+                    212:["DM",3]
+                    }
+        
+        courseCode=Object.keys(courses)
+        courseName=Object.values(courses)
+                  
+        for (i=0;i<courseName.length;i++){
+
+          
+          let code=document.querySelector("#courseCode");
+          let name=document.querySelector("#courseName");
+         
+          let option=document.createElement("option");  
+          option.innerHTML=courseCode[i];
+          option.setAttribute('id',courseCode[i])
+          code.append(option)
+          
+          
+          
+          let option1=document.createElement("option");
+          option1.innerHTML=courseName[i][0];
+          option1.setAttribute('id',courseName[i][0])
+          name.append(option1)
+
+        }
+
+        let count=0 
+        let credithour=0       
+        document.querySelector("#sub_btn").onclick=()=>{
+          let count=0
+          let code=document.querySelector("#courseCode").value;
+          let name=document.querySelector("#courseName").value;
+          if(courses[code][0]!=name){
+            alert("Course Code and Course Name are not selected Correctly")
+          }
+
+          if(courses[code][0]===name){
+            credithour+=courses[code][1]
+            if(credithour>18){
+              alert("More than 18 Credit hours are selected")
+            }
+
+            if(count>6){
+              alert("More than 6 courses are selected")
+             
+            }
+            count++
+
+            let li=document.createElement("li");
+            li.innerHTML=courses[code][0];
+            let ul=document.querySelector("#r_courses");
+            ul.append(li);
+            
+
+            document.getElementById(code).disabled=true;
+            document.getElementById(name).disabled=true;
+            
+            select_box = document.getElementById("courseName");
+            select_box.selectedIndex = -1;
+
+            select_box1 = document.getElementById("courseCode");
+            select_box1.selectedIndex = -1;
+            
+            if(count>0){
+              
+              document.querySelector("#proceed").style.display="block"
+            }
+          }
+                    
+        }
+
+        
+      })
+
+    </script>
+</head>
+<body>
+    <div class="container  mt-5 ">
+    <form id="register" >
+      
+      <?php
+      echo "SSS";
+      //your PHP code goes here
+      ?>
+      
+      <h1 class="mb-5">Course Registration Form</h1>
+        
+          <div class="form-row">
+            <div class="form-group">
+        
+            <div class="col">
+              <label for="exampleFormControlSelect2">Courses</label>
+              <select  class="form-control" id="courseName">
+              </select>    
+            </div>
+          </div>
+          <div class="form-group">
+        
+          <div class="col">
+            <label for="exampleFormControlSelect2">Course Code</label>
+            <select class="form-control  " id="courseCode">
+      
+            </select>    
+           
+          </div>
+        </div>
+        
+              </div>
+          
+    
+        <div class="form-group">
+          <button type="button" class="btn btn-dark" id="sub_btn">Add Course</button>
+
+        </div>
+     
+      </form>
+      <h3>Selected Courses</h3>
+      <ul id="r_courses"></ul>
+      <button type="button" style="display:none;" class="btn btn-primary" id="proceed">Proceed</button>
+
+         </div>
+      
+</body>
+</html>

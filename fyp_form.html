@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script>
+        document.addEventListener("DOMContentLoaded",()=>{
+            const form1=document.querySelector("#myForm1");
+            form1.onsubmit=()=>{
+            
+            
+            
+            let startDate=form1.querySelector("#eventDate").value;
+            
+            let toDate= new Date();
+            
+            
+            
+            if((new Date(startDate).getTime() <= toDate.getTime())){
+              
+              alert("Date Must be greater than Today");
+                return false;
+            }
+          }
+        })
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container p-5">
+    
+    <h3 class="text-center p-4"><b> Registration Form </b></h3>
+    <form id="myForm1" action="fyp.php" method="POST">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="orgName">Achievement Name</label>
+            <input type="text" class="form-control" id="achievementName" name="achievementName"  required>
+
+          </div>
+              
+        </div>
+        <div class="form-group">
+          <label for="eventName">Winner Email</label>
+          <input type="email" class="form-control col-6" id="winner" name="winner" required >
+        </div>
+
+        <div class="form-group">
+            <label for="eventName">Semester</label>
+            <input type="text" class="form-control col-6" id="semester" name="semester" required >
+          </div>
+  
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+</body>
+</html>
