@@ -75,7 +75,7 @@ class course {
  
  
  
-  public function create($conn,$achievement,  $semester,  $email) {
+  public function create($conn,$achievement,$email,  $semester  ) {
 
     $this->$achievement=$achievement;
     $this->semester=$semester;
@@ -91,7 +91,7 @@ if($_SESSION['role']=='student'){
 $stmt = $this->conn->prepare("INSERT INTO distinctions (achievement, st_id,semester)  VALUES (?, ?, ? )");
 
 
-$stmt->bind_param("sss",$achievement,$this->email,$this->semester,);
+$stmt->bind_param("sss",$achievement,$email,$semester );
 if ($stmt->execute()) {
   return true;
 } else {
@@ -157,6 +157,10 @@ return false;
   $obj = new course($conn);   
   $obj->read();
 
+
+if($_SESSION['role']=='admin'){
+
+  
 include_once 'fyp_form.html';
 
 //handle form submission
@@ -175,5 +179,6 @@ if($_POST){
     // else{
     //     echo "<div class='alert alert-danger'>Unable to register event.</div>";
     // }
+}
 }
 ?>
