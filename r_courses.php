@@ -8,14 +8,12 @@ class course {
   //database connection and table name
   private $conn;
   private $table_name = "distinctions";
-  private $achievement;
-  private $semester;
-  private $st_id;
-  private $email;
+
+  private $course;
   //object properties
   
     
-
+  
   //constructor with $db as database connection
   public function __construct($db)
   {
@@ -27,9 +25,14 @@ class course {
       
       //select all query
            
-      include_once 'fyp_db.php';
       
-                  $result = mysqli_query($this->conn, $query);
+      
+      if($_SESSION['role']=='student'){
+        
+        include 'rc_db.php';
+      
+      
+        $result = mysqli_query($this->conn, $query);
                   
                   // If there are results from the database
                   if (mysqli_num_rows($result) > 0) {
@@ -43,9 +46,7 @@ class course {
                     echo '<thead> ';
                     echo '    <tr> ';
                     echo '      <th scope="col">#</th> ';
-                    echo '      <th scope="col">Winner</th> ';
-                    echo '      <th scope="col">Achievement Name</th> ';
-                    echo '      <th scope="col">Semester</th> ';
+                    echo '      <th scope="col">Courses Name</th> ';
                     echo '      </tr> ';
                     echo '</thead> ';
                       // Print the data
@@ -53,8 +54,6 @@ class course {
                           echo '<tr>';
                           echo '<td></td>';
                           echo '<td>' . $row['name'] . '</td>';
-                          echo '<td> ' . $row['achievement'] . ' </td>';
-                          echo '<td> ' . $row['semester'] . ' </td>';
                           echo '</tr>';
                      }
                   
@@ -63,16 +62,49 @@ class course {
                   } else {
                       echo 'No results';
                   }
+                }
+            
+                else{
+
+                    $result1 = mysqli_query($this->conn, $query1);
+                  
+                    // If there are results from the database
+                    if (mysqli_num_rows($result1) > 0) {
+                        // Start a table
+                       echo '<div class ="container">';
+                        echo '<table class="table"> ';
+                        
+                        // Print the table headers
+                     
+  
+                      echo '<thead> ';
+                      echo '    <tr> ';
+                      echo '      <th scope="col">#</th> ';
+                      echo '      <th scope="col">Courses Name</th> ';
+                      echo '      </tr> ';
+                      echo '</thead> ';
+                        // Print the data
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo '<tr>';
+                            echo '<td></td>';
+                            echo '<td>' . $row['rc'] . '</td>';
+                            echo '</tr>';
+                       }
+                    
+                        // End the table
+                        echo '</table>';
+                    } else {
+                        echo 'No results';
+                    } 
+                }
   }
  
  
  
-  public function create($conn,$achievement,$email,  $semester  ) {
+  public function create($conn,$course ) {
 
-    $this->$achievement=$achievement;
-    $this->semester=$semester;
-    $this->email=$email;
-    include 'fyp_db.php';
+    $this->$course=$course;
+    include 'rc_db.php';
 
 
 
@@ -84,7 +116,7 @@ if ($stmt->execute()) {
 }
 
     if ($conn->query($sql) === TRUE) {
-      echo "New registration created successfully";
+      echo "Courses Registered successfully";
     } else {
       echo "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -98,7 +130,7 @@ if ($stmt->execute()) {
   $obj->read();
 
 
-if($_SESSION['role']=='admin'){
+if($_SESSION['role']=='student'){
 
   
 include_once 'fyp_form.html';

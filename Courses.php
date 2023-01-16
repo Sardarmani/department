@@ -75,6 +75,7 @@ class course {
     //   return $stmt;
   }
   public function create($conn) {
+    
     $sql = "INSERT INTO events (name,  date)
             VALUES ('$this->name', '$this->date' )";
 

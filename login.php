@@ -95,20 +95,4 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $login->checkCredentials();
 }
 
-
-
-// $name=$_POST['uname'];
-// $pass=$_POST['pass'];
-
-// if ($name=="m@gmail.com"){
-//     session_start();
-//     $_SESSION['id'] = 123;
-//     header("Location:home.php");
-//     exit();
-// }
-// else{
-//     header("Location:login.html");
-
-// }
-
 ?>
